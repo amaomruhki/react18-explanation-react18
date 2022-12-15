@@ -1,22 +1,27 @@
-import { Suspense } from "react";
+import { Suspense, useState } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import { AlbumList } from "./AlbumList";
 import { Sidebar } from "./Sidebar";
 import { TodoList } from "./TodoList";
 
+type Tabs = "todo" | "album";
+
 export const ReactQuery = () => {
+	const [selectedTabs, setSelectedTabs] = useState<Tabs>("todo");
+	const onClickTabButton = (tab: Tabs) => {
+		setSelectedTabs(tab);
+	};
+
 	return (
 		<div style={{ display: "flex", padding: "16px" }}>
 			<Sidebar />
 			<div style={{ flexGrow: 1 }}>
-				<ErrorBoundary fallback={<p>AlbumListエラーです！</p>}>
-					<Suspense fallback={<p>AlbumListローディング中ですわよ</p>}>
-						<AlbumList />
-					</Suspense>
-				</ErrorBoundary>
-				<ErrorBoundary fallback={<p>TodoListエラーです！</p>}>
-					<Suspense fallback={<p>TodoListローディング中ですわよ</p>}>
-						<TodoList />
+				<button onClick={() => onClickTabButton("todo")}>TODO</button>
+				<button onClick={() => onClickTabButton("album")}>Album</button>
+
+				<ErrorBoundary fallback={<h1>Todo or AlbumListエラーだよ〜</h1>}>
+					<Suspense fallback={<p>Todo or AlbumListローディング中だよ〜</p>}>
+						{selectedTabs === "todo" ? <TodoList /> : <AlbumList />}
 					</Suspense>
 				</ErrorBoundary>
 			</div>

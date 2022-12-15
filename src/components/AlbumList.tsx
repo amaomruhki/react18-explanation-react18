@@ -21,7 +21,8 @@ const fetchAlbums = async () => {
 };
 
 export const AlbumList = () => {
-	const { data } = useQuery<Album[]>([""], fetchAlbums);
+	const { data } = useQuery<Album[]>(["albums"], fetchAlbums);
+
 	return (
 		<div
 			style={{

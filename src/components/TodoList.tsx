@@ -16,7 +16,7 @@ const fetchTodos = async () => {
 };
 
 export const TodoList = () => {
-	const { data } = useQuery<Todo[]>([""], fetchTodos);
+	const { data } = useQuery<Todo[]>(["todos"], fetchTodos);
 	return (
 		<div
 			style={{
