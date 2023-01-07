@@ -16,7 +16,7 @@ export const TaskList = ({ taskList }: Props) => {
 					style={{
 						width: "300px",
 						margin: "auto",
-						background: "lavender",
+						background: "red",
 					}}
 				>
 					<p>タイトル:{task.title}</p>
